@@ -1,9 +1,16 @@
 const express = require('express')
 var morgan = require('morgan')
 const app = express()
+const cors = require('cors')
 
 // JSON parser middleware
 app.use(express.json())
+
+// Grants access to data from external requests
+app.use(cors())
+
+// allows Express to show static content. Checks build folder first
+app.use(express.static('build'))
 
 let persons = [
     { 
@@ -105,7 +112,7 @@ const unknownEndpoint = (request, response) => {
   
 app.use(unknownEndpoint)
 
-const PORT = 3001
+const PORT = process.env.PORT || 3001
 app.listen(PORT, () => {
     console.log(`server running on PORT ${PORT}`)
 })
