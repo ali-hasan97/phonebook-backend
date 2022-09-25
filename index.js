@@ -1,16 +1,16 @@
 const express = require('express')
+const cors = require('cors')
 var morgan = require('morgan')
 const app = express()
-const cors = require('cors')
 
-// JSON parser middleware
-app.use(express.json())
+// allows Express to show static content. Checks build folder first
+app.use(express.static('build'))
 
 // Grants access to data from external requests
 app.use(cors())
 
-// allows Express to show static content. Checks build folder first
-app.use(express.static('build'))
+// JSON parser middleware
+app.use(express.json())
 
 let persons = [
     { 
