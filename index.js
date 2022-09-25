@@ -65,12 +65,28 @@ const generateId = () => {
     return maxId + 1
 }
 
+const searchName = name => {
+    const person = persons.find(person => person.name === name)
+    return person
+}
+
 app.post('/api/persons', (request, response) => {
     const body = request.body
+    if (!body.name || !body.number) {
+        return response.status(404).json({
+            error: 'name or number missing'
+        })
+    }
+    const existingPerson = searchName(body.name)
+    if (existingPerson) {
+        return response.status(404).json({
+            error: 'duplicate person'
+        })
+    }
     const person = {
         id: generateId(),
         name: body.name,
-        num: body.number
+        number: body.number
     }
     persons = persons.concat(person)
     response.json(person)
