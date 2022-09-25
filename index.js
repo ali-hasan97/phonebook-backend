@@ -1,6 +1,8 @@
 const express = require('express')
+var morgan = require('morgan')
 const app = express()
 
+// JSON parser middleware
 app.use(express.json())
 
 let persons = [
@@ -25,6 +27,11 @@ let persons = [
         number: "39-23-6423122"
     }
 ]
+
+morgan.token('requestParams', req => JSON.stringify(req.body));
+const morganFormat =
+  ':method :url :status :res[content-length] - :response-time ms :requestParams';
+app.use(morgan(morganFormat));
 
 app.get('/', (request, response) => {
     response.send('HOME')
@@ -91,6 +98,12 @@ app.post('/api/persons', (request, response) => {
     persons = persons.concat(person)
     response.json(person)
 })
+
+const unknownEndpoint = (request, response) => {
+    response.status(404).send({ error: 'unknown endpoint' })
+  }
+  
+app.use(unknownEndpoint)
 
 const PORT = 3001
 app.listen(PORT, () => {
