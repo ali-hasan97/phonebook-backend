@@ -1,6 +1,6 @@
-# fly.toml file generated for red-leaf-6572 on 2022-09-25T04:10:39-05:00
+# fly.toml file generated for rough-morning-7936 on 2022-09-25T06:53:27-05:00
 
-app = "red-leaf-6572"
+app = "rough-morning-7936"
 kill_signal = "SIGINT"
 kill_timeout = 5
 processes = []
