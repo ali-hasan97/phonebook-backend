@@ -8,8 +8,15 @@ mongoose.connect(url).then(console.log('connected to MongoDB'))
 
 // schema defines a structure
 const personSchema = new mongoose.Schema({
-  name: String,
-  number: String
+  name: {
+    type: String,
+    required: true
+  },
+  number: {
+    type: String,
+    required: true,
+    minLength: 8
+  }
 })
 
 personSchema.set('toJSON', {
