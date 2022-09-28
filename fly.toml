@@ -1,6 +1,6 @@
-# fly.toml file generated for rough-morning-7936 on 2022-09-25T06:53:27-05:00
+# fly.toml file generated for phonebook-app-123 on 2022-09-28T03:35:05-05:00
 
-app = "rough-morning-7936"
+app = "phonebook-app-123"
 kill_signal = "SIGINT"
 kill_timeout = 5
 processes = []
